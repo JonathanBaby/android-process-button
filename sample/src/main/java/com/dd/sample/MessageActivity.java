@@ -3,14 +3,15 @@ package com.dd.sample;
 import com.dd.processbutton.iml.SubmitProcessButton;
 import com.dd.sample.utils.ProgressGenerator;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 
-public class MessageActivity extends Activity implements ProgressGenerator.OnCompleteListener {
+
+public class MessageActivity extends AppCompatActivity implements ProgressGenerator.OnCompleteListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

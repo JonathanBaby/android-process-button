@@ -3,14 +3,15 @@ package com.dd.sample;
 import com.dd.processbutton.iml.ActionProcessButton;
 import com.dd.sample.utils.ProgressGenerator;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 
-public class SignInActivity extends Activity implements ProgressGenerator.OnCompleteListener {
+
+public class SignInActivity extends AppCompatActivity implements ProgressGenerator.OnCompleteListener {
 
     public static final String EXTRAS_ENDLESS_MODE = "EXTRAS_ENDLESS_MODE";
 

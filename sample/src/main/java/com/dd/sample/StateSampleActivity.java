@@ -1,15 +1,15 @@
 package com.dd.sample;
 
+import android.support.v7.app.AppCompatActivity;
+
 import com.dd.processbutton.iml.ActionProcessButton;
 import com.dd.processbutton.iml.GenerateProcessButton;
 import com.dd.processbutton.iml.SubmitProcessButton;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 
-
-public class StateSampleActivity extends Activity implements View.OnClickListener {
+public class StateSampleActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ActionProcessButton mBtnAction;
     private GenerateProcessButton mBtnGenerate;
