@@ -10,8 +10,7 @@
         android:theme="@android:style/Theme.Holo.Light">
         <activity
             android:name="com.dd.sample.MainActivity"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Holo.Light">
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -19,23 +18,19 @@
         </activity>
         <activity
             android:name="com.dd.sample.MessageActivity"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Holo.Light" />
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name="com.dd.sample.SignInActivity"
-            android:configChanges="orientation|screenSize|smallestScreenSize"
-            android:theme="@android:style/Theme.Holo.Light" />
+            android:configChanges="orientation|screenSize|smallestScreenSize"/>
 
         <activity
             android:name="com.dd.sample.UploadActivity"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Holo.Light" />
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name="com.dd.sample.StateSampleActivity"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Holo.Light" />
+            android:screenOrientation="portrait"/>
 
     </application>
 
