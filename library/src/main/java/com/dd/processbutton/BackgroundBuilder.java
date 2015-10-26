@@ -71,36 +71,13 @@ public class BackgroundBuilder {
         return new RippleDrawable(color, stateListDrawable, new ColorDrawable(Color.WHITE));
     }
 
-    private Drawable createNormalDrawableV21(TypedArray attr, int cornerRadius) {
+    private Drawable createNormalDrawable(TypedArray attr, int cornerRadius) {
         GradientDrawable drawableNormal =
                 (GradientDrawable) getDrawable(R.drawable.rect_normal).mutate();
         drawableNormal.setCornerRadius(cornerRadius);
+
         int blueNormal = getColor(R.color.blue_normal);
         setColor(drawableNormal, attr, R.styleable.FlatButton_pb_colorNormal, blueNormal);
-        return drawableNormal;
-    }
-
-    private Drawable createNormalDrawable(TypedArray attr, int cornerRadius) {
-        if (Build.VERSION.SDK_INT >= 21) {
-            return createNormalDrawableV21(attr, cornerRadius);
-        }
-
-        LayerDrawable drawableNormal =
-                (LayerDrawable) getDrawable(R.drawable.rect_normal).mutate();
-
-        GradientDrawable drawableTop =
-                (GradientDrawable) drawableNormal.getDrawable(0).mutate();
-        drawableTop.setCornerRadius(cornerRadius);
-
-        int blueDark = getColor(R.color.blue_pressed);
-        setColor(drawableTop, attr, R.styleable.FlatButton_pb_colorPressed, blueDark);
-
-        GradientDrawable drawableBottom =
-                (GradientDrawable) drawableNormal.getDrawable(1).mutate();
-        drawableBottom.setCornerRadius(cornerRadius);
-
-        int blueNormal = getColor(R.color.blue_normal);
-        setColor(drawableBottom, attr, R.styleable.FlatButton_pb_colorNormal, blueNormal);
         return drawableNormal;
     }
 
