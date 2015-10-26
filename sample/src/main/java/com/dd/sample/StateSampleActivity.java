@@ -28,10 +28,13 @@ public class StateSampleActivity extends AppCompatActivity implements View.OnCli
         findViewById(R.id.btnProgressError).setOnClickListener(this);
         findViewById(R.id.btnProgressComplete).setOnClickListener(this);
         findViewById(R.id.btnProgressNormal).setOnClickListener(this);
+        findViewById(R.id.btnDisable).setOnClickListener(this);
+        findViewById(R.id.btnEnable).setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
+
         switch (v.getId()) {
             case R.id.btnProgressLoading:
                 mBtnAction.setProgress(50);
@@ -52,6 +55,16 @@ public class StateSampleActivity extends AppCompatActivity implements View.OnCli
                 mBtnAction.setProgress(0);
                 mBtnSubmit.setProgress(0);
                 mBtnGenerate.setProgress(0);
+                break;
+            case R.id.btnEnable:
+                mBtnAction.setEnabled(true);
+                mBtnSubmit.setEnabled(true);
+                mBtnGenerate.setEnabled(true);
+                break;
+            case R.id.btnDisable:
+                mBtnAction.setEnabled(false);
+                mBtnSubmit.setEnabled(false);
+                mBtnGenerate.setEnabled(false);
                 break;
         }
     }
