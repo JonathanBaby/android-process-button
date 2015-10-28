@@ -5,8 +5,10 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
-import android.graphics.Color;
-import android.graphics.drawable.*;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.RippleDrawable;
+import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
@@ -62,13 +64,14 @@ public class BackgroundBuilder {
 
         stateListDrawable.addState(new int[]{-android.R.attr.state_enabled},
                 createDisabledDrawable(attr, cornerRadius));
+        Drawable normalDrawable = createNormalDrawable(attr, cornerRadius);
         stateListDrawable.addState(new int[]{},
-                createNormalDrawable(attr, cornerRadius));
+                normalDrawable);
 
         int blueDark = getColor(R.color.blue_pressed);
         ColorStateList color = getColor(attr, R.styleable.FlatButton_pb_colorPressed, blueDark);
 
-        return new RippleDrawable(color, stateListDrawable, new ColorDrawable(Color.WHITE));
+        return new RippleDrawable(color, stateListDrawable, normalDrawable);
     }
 
     private Drawable createNormalDrawable(TypedArray attr, int cornerRadius) {
