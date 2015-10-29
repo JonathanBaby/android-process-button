@@ -9,8 +9,11 @@ import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.view.ViewTreeObserver;
+
 import com.dd.processbutton.ProcessButton;
 import com.dd.processbutton.R;
+
 import fr.castorflex.android.smoothprogressbar.SmoothProgressDrawable;
 
 /*
@@ -106,6 +109,26 @@ public class ActionProcessButton extends ProcessButton {
                 .colors(new int[] { mColor1, mColor2, mColor3, mColor4 });
         mEndlessProgressDrawable = builder.build();
         mEndlessProgressDrawable.setCallback(this);
+
+        this.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                ActionProcessButton button = ActionProcessButton.this;
+                int cornerRadius = (int) button.getCornerRadius();
+                int strokeWidth = (int) mEndlessProgressDrawable.getStrokeWidth();
+                int width = button.getWidth();
+                int height = button.getHeight();
+
+                mEndlessProgressDrawable.setBounds(cornerRadius, height-strokeWidth, width, height);
+
+                // Important: remove this listener to not keep receiving callbacks
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                    button.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                } else {
+                    button.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                }
+            }
+        });
     }
 
     @Override
@@ -159,7 +182,7 @@ public class ActionProcessButton extends ProcessButton {
         float scale = (float) getProgress() / (float) getMaxProgress();
         float indicatorWidth = (float) getMeasuredWidth() * scale;
 
-        getProgressBounds(rect);
+        getProgressDrawableBounds(rect);
         overlay.setBounds(rect.left, rect.top, rect.right, rect.bottom);
         overlay.draw(canvas);
 
@@ -168,9 +191,6 @@ public class ActionProcessButton extends ProcessButton {
     }
 
     private void drawEndlessProgress(Canvas canvas) {
-        getProgressBounds(rect);
-        mEndlessProgressDrawable.setBounds(rect);
-        mEndlessProgressDrawable.setStrokeWidth(rect.height());
         if (mEndlessProgressDrawable.isRunning()) {
             int state = canvas.save();
             mEndlessProgressDrawable.draw(canvas);
@@ -178,7 +198,7 @@ public class ActionProcessButton extends ProcessButton {
         }
     }
 
-    private void getProgressBounds(Rect rect) {
+    private void getProgressDrawableBounds(Rect rect) {
         double indicatorHeightPercent = 0.08; // 5%
         int bottom = (int) (getMeasuredHeight() - getMeasuredHeight() * indicatorHeightPercent);
         rect.set(0, bottom, getMeasuredWidth(), getMeasuredHeight());
