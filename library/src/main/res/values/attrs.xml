@@ -20,6 +20,7 @@
 
     <declare-styleable name="FlatButton">
         <attr name="pb_colorPressed" format="color|reference" />
+        <attr name="pb_colorFocused" format="color|reference" />
         <attr name="pb_colorNormal" format="color|reference" />
         <attr name="pb_colorDisabled" format="color|reference" />
         <attr name="pb_cornerRadius" format="dimension|reference" />
