@@ -107,13 +107,13 @@ public abstract class ProcessButton extends FlatButton {
             autoResumeToNormalState = attr.getBoolean(R.styleable.ProcessButton_pb_autoResumeToNormal, autoResumeToNormalState);
             autoResumeToNormalStateDelay = attr.getInt(R.styleable.ProcessButton_pb_autoResumeToNormalDelay, autoResumeToNormalStateDelay);
 
-            int purple = getColor(R.color.purple_progress);
+            int purple = getColor(R.color.btn_progress);
             setColor(mProgressDrawable, attr, R.styleable.ProcessButton_pb_colorProgress, purple);
 
-            int green = getColor(R.color.green_complete);
+            int green = getColor(R.color.btn_complete);
             setColor(mCompleteDrawable, attr, R.styleable.ProcessButton_pb_colorComplete, green);
 
-            int red = getColor(R.color.red_error);
+            int red = getColor(R.color.btn_error);
             setColor(mErrorDrawable, attr, R.styleable.ProcessButton_pb_colorError, red);
         } finally {
             attr.recycle();

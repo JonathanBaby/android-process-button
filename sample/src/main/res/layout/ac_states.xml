@@ -17,7 +17,7 @@
         custom:pb_textProgress="@string/Uploading"
         custom:pb_textError="Error"
         custom:pb_progress_color_1="#9C27B0"
-        custom:pb_progress_color_2="@color/green_complete"
+        custom:pb_progress_color_2="@color/btn_complete"
         custom:pb_progress_color_3="#FF9800"
         custom:pb_progress_color_4="#F44336"/>
 
