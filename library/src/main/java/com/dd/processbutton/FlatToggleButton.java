@@ -11,6 +11,8 @@ import android.os.Build;
 import android.util.AttributeSet;
 import android.widget.ToggleButton;
 
+import com.dd.processbutton.utils.DrawableUtils;
+
 public class FlatToggleButton extends ToggleButton {
 
     private Drawable mDrawable;
@@ -85,11 +87,11 @@ public class FlatToggleButton extends ToggleButton {
 
     @SuppressLint("NewApi")
     protected void setColor(GradientDrawable drawable, TypedArray attr, int index, int defaultColor) {
-        BackgroundBuilder.setColor(drawable, attr, index, defaultColor);
+        DrawableUtils.setColorFromAttribute(drawable, attr, index, defaultColor);
     }
 
     protected ColorStateList getColor(TypedArray attr, int index, int defaultColor) {
-        return BackgroundBuilder.getColor(attr, index, defaultColor);
+        return DrawableUtils.getColorFromAttribute(attr, index, defaultColor);
     }
 
     protected int getColor(int id) {

@@ -1,6 +1,5 @@
 package com.dd.processbutton;
 
-import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -11,7 +10,6 @@ import android.graphics.drawable.RippleDrawable;
 import android.os.Build;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.AttributeSet;
-import android.view.View;
 
 public class BackgroundBuilder {
 
@@ -66,29 +64,6 @@ public class BackgroundBuilder {
         return context.getResources().getDimension(id);
     }
 
-    @SuppressLint("NewApi")
-    public static void setColor(GradientDrawable drawable, TypedArray attr, int index, int defaultColor) {
-        ColorStateList stateList = getColor(attr, index, defaultColor);
-        if (Build.VERSION.SDK_INT >= 21) {
-            drawable.setColor(stateList);
-        } else {
-            drawable.setColor(stateList.getDefaultColor());
-        }
-    }
-
-    public static ColorStateList getColor(TypedArray attr, int index, int defaultColor) {
-        ColorStateList result = null;
-        if (attr.hasValue(index)) {
-            result = attr.getColorStateList(index);
-        }
-
-        if (result == null) {
-            result = ColorStateList.valueOf(defaultColor);
-        }
-
-        return result;
-    }
-
     public int getColor(int id) {
         return context.getResources().getColor(id);
     }
@@ -103,21 +78,5 @@ public class BackgroundBuilder {
         } else {
             return context.getResources().getDrawable(id);
         }
-    }
-
-    @SuppressWarnings("deprecation")
-    @SuppressLint("NewApi")
-    public static void setBackgroundCompat(View view, Drawable drawable) {
-        int pL = view.getPaddingLeft();
-        int pT = view.getPaddingTop();
-        int pR = view.getPaddingRight();
-        int pB = view.getPaddingBottom();
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            view.setBackground(drawable);
-        } else {
-            view.setBackgroundDrawable(drawable);
-        }
-        view.setPadding(pL, pT, pR, pB);
     }
 }

@@ -12,6 +12,8 @@ import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.widget.Button;
 
+import com.dd.processbutton.utils.DrawableUtils;
+
 public class FlatButton extends Button {
 
     private Drawable mDrawable;
@@ -94,11 +96,11 @@ public class FlatButton extends Button {
 
     @SuppressLint("NewApi")
     protected void setColor(GradientDrawable drawable, TypedArray attr, int index, int defaultColor) {
-        BackgroundBuilder.setColor(drawable, attr, index, defaultColor);
+        DrawableUtils.setColorFromAttribute(drawable, attr, index, defaultColor);
     }
 
     protected ColorStateList getColor(TypedArray attr, int index, int defaultColor) {
-        return BackgroundBuilder.getColor(attr, index, defaultColor);
+        return DrawableUtils.getColorFromAttribute(attr, index, defaultColor);
     }
 
     protected int getColor(int id) {
@@ -121,7 +123,7 @@ public class FlatButton extends Button {
     @SuppressWarnings("deprecation")
     @SuppressLint("NewApi")
     public void setBackgroundCompat(Drawable drawable) {
-        BackgroundBuilder.setBackgroundCompat(this, drawable);
+        DrawableUtils.setBackgroundCompat(this, drawable);
     }
 
     @Override
