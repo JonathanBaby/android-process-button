@@ -8,8 +8,8 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.RippleDrawable;
-import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -41,69 +41,25 @@ public class BackgroundBuilder {
         }
     }
 
-    private StateListDrawable setupDrawable(TypedArray attr, int cornerRadius) {
-        StateListDrawable stateListDrawable = new StateListDrawable();
+    private Drawable setupDrawable(TypedArray attr, int cornerRadius) {
+        ColorStateList tintStateList = context.getResources().getColorStateList(R.color.btn_tint_selector);
+        GradientDrawable roundedRectDrawable = (GradientDrawable) getDrawable(R.drawable.rounded_rect).mutate();
 
-        stateListDrawable.addState(new int[]{-android.R.attr.state_enabled},
-                createDisabledDrawable(attr, cornerRadius));
-        stateListDrawable.addState(new int[]{android.R.attr.state_pressed},
-                createPressedDrawable(attr, cornerRadius));
-        stateListDrawable.addState(new int[]{android.R.attr.state_focused},
-                createPressedDrawable(attr, cornerRadius));
-        stateListDrawable.addState(new int[]{android.R.attr.state_selected},
-                createPressedDrawable(attr, cornerRadius));
-        stateListDrawable.addState(new int[]{},
-                createNormalDrawable(attr, cornerRadius));
-
-        return stateListDrawable;
+        roundedRectDrawable.setCornerRadius(cornerRadius);
+        Drawable drawable = DrawableCompat.wrap(roundedRectDrawable);
+        DrawableCompat.setTintList(drawable, tintStateList);
+        return drawable;
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private Drawable setupDrawableV21(TypedArray attr, int cornerRadius) {
-        StateListDrawable stateListDrawable = new StateListDrawable();
+        ColorStateList tintStateList = context.getResources().getColorStateList(R.color.btn_tint_selector);
+        RippleDrawable rippleDrawable = (RippleDrawable) getDrawable(R.drawable.rounded_rect);
+        GradientDrawable roundedRectDrawable = (GradientDrawable) rippleDrawable.getDrawable(0);
 
-        stateListDrawable.addState(new int[]{-android.R.attr.state_enabled},
-                createDisabledDrawable(attr, cornerRadius));
-        Drawable normalDrawable = createNormalDrawable(attr, cornerRadius);
-        stateListDrawable.addState(new int[]{},
-                normalDrawable);
-
-        int blueDark = getColor(R.color.blue_pressed);
-        ColorStateList color = getColor(attr, R.styleable.FlatButton_pb_colorPressed, blueDark);
-
-        return new RippleDrawable(color, stateListDrawable, normalDrawable);
-    }
-
-    private Drawable createNormalDrawable(TypedArray attr, int cornerRadius) {
-        GradientDrawable drawableNormal =
-                (GradientDrawable) getDrawable(R.drawable.rect_normal).mutate();
-        drawableNormal.setCornerRadius(cornerRadius);
-
-        int blueNormal = getColor(R.color.blue_normal);
-        setColor(drawableNormal, attr, R.styleable.FlatButton_pb_colorNormal, blueNormal);
-        return drawableNormal;
-    }
-
-    private Drawable createPressedDrawable(TypedArray attr, int cornerRadius) {
-        GradientDrawable drawablePressed =
-                (GradientDrawable) getDrawable(R.drawable.rect_pressed).mutate();
-        drawablePressed.setCornerRadius(cornerRadius);
-
-        int blueDark = getColor(R.color.blue_pressed);
-        setColor(drawablePressed, attr, R.styleable.FlatButton_pb_colorPressed, blueDark);
-
-        return drawablePressed;
-    }
-
-    private Drawable createDisabledDrawable(TypedArray attr, int cornerRadius) {
-        GradientDrawable drawableDisabled =
-                (GradientDrawable) getDrawable(R.drawable.rect_disabled).mutate();
-        drawableDisabled.setCornerRadius(cornerRadius);
-
-        int blueDisabled = getColor(R.color.blue_disabled);
-        setColor(drawableDisabled, attr, R.styleable.FlatButton_pb_colorPressed, blueDisabled);
-
-        return drawableDisabled;
+        roundedRectDrawable.setCornerRadius(cornerRadius);
+        rippleDrawable.setTintList(tintStateList);
+        return rippleDrawable;
     }
 
     public float getDimension(int id) {
